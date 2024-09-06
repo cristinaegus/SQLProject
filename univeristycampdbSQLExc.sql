@@ -1,8 +1,8 @@
-
+-- Crear una base SQL con MySQL workbench para una univerdidad que administre estudiantes, cursos, profesores y calificaciones
 CREATE DATABASE universidad_sql_course_db;
 
 USE universidad_sql_course_db;
--- Construir una base de datos con las tablas porfesores, estudiantes, cursos,calificaciones
+-- Construir una base de datos con las tablas porfesores, estudiantes, cursos,calificaciones y sus relaciones  foreign key entre tablas
 CREATE TABLE calificaciones (
   calificaciones_id INT NOT NULL AUTO_INCREMENT,
   calificacion_profesor_id  INT NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE calificaciones (
   KEY fk_calificaciones_calificaciones2_idx (calificacion_profesor_id),
  CONSTRAINT  fk_calificaciones_calificaciones1
  FOREIGN KEY (calificaciones_id)    REFERENCES estudiantes (estudiante_id) ON UPDATE CASCADE
-) ;
+);
 
 CREATE TABLE  cursos (
   curso_id  INT NOT NULL AUTO_INCREMENT,
@@ -24,9 +24,7 @@ CREATE TABLE  cursos (
   PRIMARY KEY (curso_id ,cursos_curso_id),
   KEY  fk_profesor  (profesor_id),
   KEY fk_cursos_cursos1_idx ( asignatura)
-) ;
-
-
+);
 
 
 CREATE TABLE  estudiantes (
@@ -89,7 +87,7 @@ VALUES
 (17, 3003, 12801, 7.70, 745),
 (18, 3002, 12903, 5.80, 147),
 
--- LaLa nota media que da cada profesor
+-- La nota media que da cada profesor
 
 SELECT p.profesor_nombre, AVG(ca.nota) AS nota_media
 FROM profesores p
